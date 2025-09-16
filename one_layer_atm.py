@@ -25,7 +25,7 @@ t_anom = np.array([-.4, 0, .4])
 sigma = 5.67E-8 # only sigma is constant because albedo changes
 
 # Create a function for 1 layer Te
-def temp_layer1(s0 = s0, a = 0.33):
+def temp_layer1(s0 = s0, a = 0.33, epsilon = 1.0):
     '''
     This function returns surface temperature of earth in 1 layer atmosphere.
 
@@ -35,15 +35,17 @@ def temp_layer1(s0 = s0, a = 0.33):
         An array of solar forcing
     a: floating point, defaults to 0.33
         Albedo value of earth's surface
+    epsilon: float, defaults to 1.0
+        Set absorptivity/emissivity of the atmosphere
 
     Returns
     -------
-    te: numpy array
+    te: float
         Temperature of earth's surface
 
     '''
 
-    te = (((1-a) * s0) / (2 * sigma)) **(1/4)
+    te = (((1-a) * s0) / ((2 * sigma) * (2-epsilon))) **(1/4)
 
     return te
 
