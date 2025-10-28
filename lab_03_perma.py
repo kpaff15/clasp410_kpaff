@@ -191,3 +191,12 @@ def plot_kanger(xstop=100, tstop=27375, dx=1, dt=1, c2=0.0216, temp_shift=0, upp
     ax2.invert_yaxis()
 
     plt.show()
+
+
+def part1_validate():
+    t,x,U = solve_heat(valid=True)
+
+    if U.shape == sol10p3.shape:
+        print("The output matrix has the same dimensions as sol10p3")
+    else:
+        print("The output matrix dimensions differ from sol10p3")
