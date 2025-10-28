@@ -90,7 +90,6 @@ def solve_heat(xstop=1, tstop=0.2, dx=0.2, dt=0.02, c2=1, lowerbound=0, upperbou
 
     # Create solution matrix; set initial conditions
     U = np.zeros([M, N])
-    #U[:,0] = 4*x - 4*x**2
 
     if validate == True:
         U[:,0] = 4*x - 4*x**2
