@@ -22,6 +22,21 @@ import matplotlib.pyplot as plt
 
 plt.style.use('fivethirtyeight')
 
+# Solution to problem 10.3 from fink/matthews
+sol10p3 = [[0.000000, 0.640000, 0.960000, 0.960000, 0.640000, 0.000000],
+           [0.000000, 0.480000, 0.800000, 0.800000, 0.480000, 0.000000],
+           [0.000000, 0.400000, 0.640000, 0.640000, 0.400000, 0.000000],
+           [0.000000, 0.320000, 0.520000, 0.520000, 0.320000, 0.000000],
+           [0.000000, 0.260000, 0.420000, 0.420000, 0.260000, 0.000000],
+           [0.000000, 0.210000, 0.340000, 0.340000, 0.210000, 0.000000],
+           [0.000000, 0.170000, 0.275000, 0.275000, 0.170000, 0.000000],
+           [0.000000, 0.137500, 0.222500, 0.222500, 0.137500, 0.000000],
+           [0.000000, 0.111250, 0.180000, 0.180000, 0.111250, 0.000000],
+           [0.000000, 0.090000, 0.145625, 0.145625, 0.090000, 0.000000],
+           [0.000000, 0.072812, 0.117813, 0.117813, 0.072812, 0.000000]]
+sol10p3 = np.array(sol10p3).transpose()
+
+
 # Kangerlussuaq average temperature:
 t_kanger = np.array([-19.7, -21.0, -17., -8.4, 2.3, 8.4,
 10.7, 8.5, 3.1, -6.0, -12.0, -16.9])
@@ -90,7 +105,6 @@ def solve_heat(xstop=1, tstop=0.2, dx=0.2, dt=0.02, c2=1, lowerbound=0, upperbou
 
     # Create solution matrix; set initial conditions
     U = np.zeros([M, N])
-    #U[:,0] = 4*x - 4*x**2
 
     if validate == True:
         U[:,0] = 4*x - 4*x**2
@@ -192,3 +206,18 @@ def plot_kanger(xstop=100, tstop=27375, dx=1, dt=1, c2=0.0216, temp_shift=0, upp
     ax2.invert_yaxis()
 
     plt.show()
+
+
+def part1_validate():
+    t,x,U = solve_heat(validate=True)
+
+    if U.shape == sol10p3.shape:
+        print("The output matrix has the same dimensions as sol10p3")
+    else:
+        print("The output matrix dimensions differ from sol10p3")
+
+    diff = np.abs(U - sol10p3)
+    if diff.max() > 1E-6:
+        print('different from output solution')
+    else:
+        print('Solution passed check.')
